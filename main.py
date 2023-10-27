@@ -164,7 +164,7 @@ def save_file(file, name, is_encoded):  # функция сохранения ф
         f.close()   # закрытие файла
  
 def read_file(name, is_encodeed):               # функция чтения файла
-    # link_code_txt = open(name, "rt", encoding = "utf-8-sig")                                        # открытие файла на чтение в текстовом режиме с текстом на русском или английском языке
+    # link_code_txt = open(name, "rt", encoding = "utf-8-sig")      # открытие файла на чтение в текстовом режиме с текстом на русском или английском языке
     if is_encodeed:  # если файл ЗАШИФРОВАН:
         link_code_txt = open(name, "rb")
         temp = link_code_txt.read()             # копирование содержимого файла link_code_txt в переменную temp для возможножности закрытия этого файла
@@ -181,54 +181,6 @@ def read_file(name, is_encodeed):               # функция чтения ф
         link_code_txt.close()                                   # закрытие файла link_code_txt
         return file                                             # возвращаемое значение
  
- 
-def bitstring_to_bytes(s):
-    v = int(s, 2)
-    b = bytearray()
-    while v:
-        b.append(v & 0xff)
-        v >>= 8
-    return bytes(b[::-1])
- 
- 
-def encode(file, dictionary):                   # функция шифрования или расшифрования
-    decoded_file = ""                           # объявление массива decoded_file
-    for temp in file:
-        decoded_file += dictionary.get(temp)    # добавление новых значений в массив
-    return bitstring_to_bytes(decoded_file)     # (за-)расшифрованный массив - возвращаемое значение
- 
- 
- 
-def reverse_dictionary(dictionary):                     # функция для переворачивания таблицы Хаффмана
-    reverse_dictionary = {}                             # объявление словаря reverse_dictionary
-    print(dictionary)
-    for temp in dictionary:  # TODO
-        reverse_dictionary[dictionary[temp]] = temp
-    return reverse_dictionary                           # возвращение перевернтого словаря
- 
- 
-def save_file(file, name, is_encoded):  # функция сохранения файла
-    # f = open(name, "w")               # открытие файла на перезапись
-    try:
-        if is_encoded:                  # если файл ЗАШИФРОВАН то все коды сохраняются через ","
-            # for temp in file:
-            #     f.write((str)(temp))
-            #     f.write(',')
-            f = open(name, "wb")        # открытие файла на перезапись
-            f.write(file)
-        else:                           # если файл НЕ ЗАШИФРОВАН то расшифрованный текст сохраняется в файл
-            f = open(name, "w")         # открытие файла на перезапись
-            # for temp in file:
-            #     f.write((str)(temp))
-            f.write(file)
-    finally:
-        f.close()  # закрытие файла
- 
-def save_dictionary(dictionary):    # функция сохранения словаря в файл arifmetic_dictionary.txt с помощью библеотеки pickle
-    pickle.dump(dictionary, open("arifmetic_dictionary.txt", 'wb'))
- 
-def load_dictionary():              # функция загрузки словаря из файла arifmetic_dictionary.txt с помощью библеотеки pickle
-    return pickle.load(open("arifmetic_dictionary.txt", 'rb'))
  
 def main():                                     # объявление основной функции
     mode = int(input("Для шифрования файла введите 0\nДля расшифрования файла введите 1\nВыбор режима: "))

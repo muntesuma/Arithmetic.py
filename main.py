@@ -173,7 +173,8 @@ def read_file(name, is_encodeed):               # функция чтения ф
         # return list(map(int, list(filter(lambda x: not(x is None or x == ''), temp.split(',')))))   # коды в файле разделяются "," и переводятся в числовой формат, добавляются в одну строку и эта строка - возвращаемое значение
         return temp
     else:                                                       # если файл НЕ ЗАШИФРОВАН:
-        link_code_txt = open(name, "rt", encoding="utf-8-sig")
+        link_code_txt = open(name, "rt")
+        # link_code_txt = open(name, "rt", encoding="utf-8-sig")
         file = ''                                               # все символы файла добавляются в одну строку и эта строка - возвращаемое значение
         for str_temp in link_code_txt:
             for char_temp in str_temp:
